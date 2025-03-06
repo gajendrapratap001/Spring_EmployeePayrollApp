@@ -3,8 +3,8 @@ package com.example.employeepayroll.controller;
 import com.example.employeepayroll.dto.EmployeeDTO;
 import com.example.employeepayroll.model.Employee;
 import com.example.employeepayroll.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

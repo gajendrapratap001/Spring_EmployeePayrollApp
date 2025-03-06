@@ -1,12 +1,14 @@
 package com.example.employeepayroll.service;
 
+import com.example.employeepayroll.dto.EmployeeDTO;
 import com.example.employeepayroll.model.Employee;
 import com.example.employeepayroll.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+//import java.util.Optional;
+
 
 @Service
 public class EmployeeService {
@@ -18,25 +20,22 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Optional<Employee> getEmployeeById(Long id) {
-        return employeeRepository.findById(id);
+    public Employee getEmployeeById(Long id) {
+        return employeeRepository.findById(id).orElse(null);
     }
 
-    public Employee addEmployee(Employee employee) {
+
+    public Employee addEmployee(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        employee.setName(employeeDTO.getName());
+        employee.setDepartment(employeeDTO.getDepartment());
+        employee.setSalary(employeeDTO.getSalary());
         return employeeRepository.save(employee);
-    }
-
-    public Employee updateEmployee(Long id, Employee updatedEmployee) {
-        return employeeRepository.findById(id)
-                .map(emp -> {
-                    emp.setName(updatedEmployee.getName());
-                    emp.setDepartment(updatedEmployee.getDepartment());
-                    emp.setSalary(updatedEmployee.getSalary());
-                    return employeeRepository.save(emp);
-                }).orElse(null);
     }
 
     public void deleteEmployee(Long id) {
         employeeRepository.deleteById(id);
     }
+
+
 }
